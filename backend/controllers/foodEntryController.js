@@ -22,6 +22,13 @@ const createFoodEntry = asyncHandler(async (req, res) => {
   if (!req.body.name)
     createErrorResponse(res, 400, 'Please add a `name` field for food entry.');
 
+  // @TODO
+  //  I need to avoid duplicate food entries.
+  //  If a food exists via a name AND baby Id, then we want to create an error response
+  // const foodExistsForBaby = await FoodEntry.findOne({ name: })
+  // if (foodExistsForBaby)
+  //   createErrorResponse(res, 400, 'Food already exists!');
+
   const foodEntry = await FoodEntry.create({
     name: req.body.name,
     babyLiked: req.body.babyLiked,

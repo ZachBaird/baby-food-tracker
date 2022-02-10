@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const { createErrorResponse } = require('../utilities/createErrorResponse');
+const initialFoodEntries = require('../resources/initialFoodEntries');
 const Baby = require('../models/babyModel');
+const FoodEntry = require('../models/foodEntryModel');
 
 // @desc      Gets list of babies of user/parent
 // @route     GET /api/babies
@@ -21,6 +23,12 @@ const createBaby = asyncHandler(async (req, res) => {
     name: req.body.name,
     user: req.user.id,
   });
+
+  // Create initial food entries for this baby, to guide parents on what foods baby can try.
+  // @TODO: 
+  //  Explore how to possibly update each record through a callback in insertMany vs. iterating with forEach.
+  initialFoodEntries.forEach((entry) => entry.baby = baby.id);
+  await FoodEntry.insertMany(initialFoodEntries);
 
   res.status(200).json(baby);
 });
