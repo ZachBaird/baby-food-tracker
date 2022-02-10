@@ -1,13 +1,17 @@
 const asyncHandler = require('express-async-handler');
-
-// Model.
+const { createErrorResponse } = require('../utilities/createErrorResponse');
 const FoodEntry = require('../models/foodEntryModel');
+const Baby = require('../models/babyModel');
 
 // @desc    Get food entries
 // @route   GET /api/foodentries
 // @access  Private
 const getFoodEntries = asyncHandler(async (req, res) => {
-  const foodEntries = await FoodEntry.find();
+  const baby = await Baby.findOne({ user: req.user.id });
+  if (!baby)
+    createErrorResponse(res, 403, 'Invalid baby access.');
+
+  const foodEntries = await FoodEntry.find({ baby: req.params.babyId });
   return res.status(200).json(foodEntries);
 });
 
@@ -15,16 +19,15 @@ const getFoodEntries = asyncHandler(async (req, res) => {
 // @route   POST /api/foodentries
 // @access  Private
 const createFoodEntry = asyncHandler(async (req, res) => {
-  if (!req.body.name) {
-    res.status(400);
-    throw new Error('Please add a `name` field for food entry.');
-  }
+  if (!req.body.name)
+    createErrorResponse(res, 400, 'Please add a `name` field for food entry.');
 
   const foodEntry = await FoodEntry.create({
     name: req.body.name,
     babyLiked: req.body.babyLiked,
     notes: req.body.notes,
     type: req.body.type,
+    baby: req.params.babyId,
   });
 
   return res.status(200).json(foodEntry);
@@ -34,12 +37,13 @@ const createFoodEntry = asyncHandler(async (req, res) => {
 // @route   PUT /api/foodentries/:id
 // @access  PRIVATE
 const updateFoodEntry = asyncHandler(async (req, res) => {
+  const baby = await Baby.findOne({ user: req.user.id });
+  if (!baby)
+    createErrorResponse(res, 403, 'Invalid baby access.');
+  
   const foodEntry = await FoodEntry.findById(req.params.id);
-
-  if (!foodEntry) {
-    res.status(400);
-    throw new Error('Food entry not found');
-  }
+  if (!foodEntry)
+    createErrorResponse(res, 400, 'Food entry not found.');
 
   // Going to pull out what I want manually to avoid people sending unnecessary data potentially.
   const dataToUpdate = {
@@ -58,15 +62,16 @@ const updateFoodEntry = asyncHandler(async (req, res) => {
 // @route   DELETE /api/foodentries/:id
 // @access  PRIVATE
 const deleteFoodEntry = asyncHandler(async (req, res) => {
+  const baby = await Baby.findOne({ user: req.user.id });
+  if (!baby) 
+    createErrorResponse(res, 403, 'Invalid baby access.');
+    
   const foodEntry = await FoodEntry.findById(req.params.id);
-
-  if (!foodEntry) {
-    res.status(400);
-    throw new Error('Food entry not found');
-  }
+  if (!foodEntry)
+    createErrorResponse(res, 400, 'Food entry not found.');
 
   await foodEntry.remove();
-  return res.status(200).json({ id: req.params.id, message: `Deleting food entry with id of ${req.params.id}` });
+  return res.status(200).json({ id: req.params.id, message: `Deleting food entry with id of ${req.params.id}.` });
 });
 
 module.exports = {

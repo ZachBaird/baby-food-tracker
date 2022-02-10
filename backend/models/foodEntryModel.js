@@ -14,6 +14,11 @@ const foodEntrySchema = mongoose.Schema({
   type: {
     type: String,
     required: [true, 'Please specify what type of food this entry is.'],
+  },
+  baby: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Baby',
   }
 }, {
   timestamps: true
