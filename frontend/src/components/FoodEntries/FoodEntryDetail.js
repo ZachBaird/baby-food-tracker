@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalState";
 import { func } from "prop-types";
 import Box from '@mui/material/Box';
@@ -20,6 +20,7 @@ const propTypes = {
 const FoodEntryDetail = ({ setNav }) => {
   const { currentFoodEntry, assignFoodEntry } = useContext(GlobalContext);
   const { babyId, id } = useParams();
+  let navigate = useNavigate();
   const [hasBabyTried, setHasBabyTried] = useState(false);
   const [newNotes, setNewNotes] = useState(currentFoodEntry?.notes ?? '');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -59,6 +60,8 @@ const FoodEntryDetail = ({ setNav }) => {
     </p>
   );
 
+  const allergenMessage = currentFoodEntry?.type === 'Allergens' ? (<p className="allergen-message">NOTE: This is an allergen food! Follow instructions from your pediatrician and proceed with caution!</p>) : <></>;
+
   const setLike = async (e, liked) => {
     e.preventDefault();
     const newFoodEntry = { ...currentFoodEntry, babyLiked: liked };
@@ -96,7 +99,22 @@ const FoodEntryDetail = ({ setNav }) => {
       setShowErrorAlert(true);
       setTimeout(() => setShowErrorAlert(false), 2500);
     };
-  }
+  };
+
+  const deleteFoodEntry = async (e) => {
+    e.preventDefault();
+
+    const result = await foodEntryService.deleteFoodEntry(
+      getCookieValue(token),
+      babyId,
+      id,
+    );
+
+    if (result) {
+      assignFoodEntry({});
+      navigate(`/babies/${babyId}`);
+    }
+  };
 
   return (
     <div className="page-container">
@@ -106,11 +124,13 @@ const FoodEntryDetail = ({ setNav }) => {
 
       <div className="food-entry-detail-container">
         <section className="upper-section">
-          <p style={{marginLeft: '30px', marginBottom: '5px', fontSize: '34px', color: '#eee'}}>{currentFoodEntry?.name}</p>
+          <p style={{marginLeft: '30px', marginTop: '15px', marginBottom: '5px', fontSize: '34px', color: '#eee'}}>{currentFoodEntry?.name}</p>
           <p style={{marginLeft: '35px', marginTop: '0', fontSize: '16px'}}>{currentFoodEntry?.type}</p>
         </section>
 
         {hasBabyTried ? foodTried : foodNotTried}
+
+        {allergenMessage}
 
         <section className="button-section">
           <Button className="baby-liked-btn" onClick={(e) => babyLiked(e)}>
@@ -136,6 +156,8 @@ const FoodEntryDetail = ({ setNav }) => {
         </Box>
 
         <p>Entry last updated: {new Date(currentFoodEntry?.updatedAt).toLocaleDateString()} </p>
+
+        <Button className="delete-food-entry-btn" onClick={(e) => deleteFoodEntry(e)} id="outlined-basic">Delete</Button>
       </div>
     </div>
   );

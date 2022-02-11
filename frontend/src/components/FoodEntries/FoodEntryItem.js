@@ -52,7 +52,7 @@ const FoodEntryItem = ({ babyId, _id, name, type, babyLiked }) => {
 
   return (
     <Button className={`food-entry-item ${colorClass}`} onClick={() => handleClick()} href={`/babies/${babyId}/${_id}`}>
-      <p>{name}</p>
+      <p>{name} &nbsp; <span style={{fontSize: '10px'}}>{type}</span></p>
       <CheckBoxIcon className={`food-entry-checkmark ${checkmarkClass}`} />
     </Button>
   );

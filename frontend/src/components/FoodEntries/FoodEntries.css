@@ -2,42 +2,92 @@
   display: flex !important;
   align-items: center;
   justify-content: space-between !important;
-  background: #ddd !important;
-  color: #333 !important;
+  color: #ddd !important;
   border-radius: 10px !important;
   box-shadow: 3px 3px 4px 4px rgba(0, 0, 0, 0.25);
   width: 75% !important;
+  height: 55px !important;
   margin: 10px auto !important;
   padding: 0 10px !important;
   cursor: pointer !important;
 }
 
+.modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modal-body {
+  font-size: 14px;
+}
+
+.info-modal button {
+  color: #e91e63;
+}
+
+.food-list-info-icon {
+  color: #5727b0;
+  cursor: pointer;
+}
+
+.new-food-modal .modal-title button {
+  color: #e91e63;
+}
+
+.new-food-modal .modal-body input,
+.new-food-modal .modal-body label,
+.new-food-modal .modal-body select {
+  color: #ccc;
+}
+
+.MuiInputBase-formControl svg {
+  color: #fff !important;
+}
+
+#demo-simple-select {
+  color: #ccc !important;
+}
+
+.new-food-modal .modal-body button {
+  background: #56af7a;
+  color: #fff;
+  display: inline-block;
+}
+
+.switch-and-label {
+  display: flex;
+  align-items: center;
+}
+
 .green-border {
-  border: 2px solid green !important;
+  border: 1px solid green !important;
 }
 
 .yellow-border {
-  border: 2px solid yellow !important;
+  border: 1px solid yellow !important;
 }
 
 .tan-border {
-  border: 2px solid tan !important;
+  border: 1px solid tan !important;
 }
 
 .red-border {
-  border: 2px solid red !important;
+  border: 1px solid red !important;
 }
 
 .purple-border {
-  border: 2px solid purple !important;
+  border: 1px solid purple !important;
 }
 
 .teal-border {
-  border: 2px solid teal !important;
+  border: 1px solid teal !important;
 }
 
 .orange-border {
-  border: 2px solid orange !important;
+  border: 1px solid orange !important;
 }
 
 .food-entry-item p {
@@ -82,7 +132,8 @@
 }
 
 .baby-liked-btn,
-.baby-disliked-btn {
+.baby-disliked-btn,
+.delete-food-entry-btn {
   display: flex !important;
   align-items: center;
   justify-content: space-between !important;
@@ -93,6 +144,12 @@
   margin: 10px !important;
   padding: 0 10px !important;
   cursor: pointer !important;
+}
+
+.delete-food-entry-btn {
+  display: block !important;
+  width: 50% !important;
+  background: #c91e57 !important;
 }
 
 .baby-liked-btn {
@@ -122,6 +179,14 @@
 
 .back-btn svg {
   margin-left: 7px !important;
+}
+
+.allergen-message {
+  color: #fff;
+  width: 80%;
+  border: 2px solid #9c27b0;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .notes-form {
