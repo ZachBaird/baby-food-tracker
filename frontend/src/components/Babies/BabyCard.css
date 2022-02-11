@@ -1,0 +1,30 @@
+.baby-card {
+  background: #343434 !important;
+  border-radius: 10px;
+  padding: 40px;
+  color: #ddd !important;
+  width: 70% !important;
+  cursor: pointer;
+  text-align: center;
+  transition: .2s ease-out;
+  box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.15);
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between !important;
+  margin-bottom: 25px;
+}
+
+.baby-card p {
+  margin-left: 20px;
+}
+
+.baby-card:active {
+  border-radius: 10px;
+  background: #454545 !important;
+}
+
+.baby-card-icon {
+  color: #57acdc;
+  cursor: pointer;
+  transition: .2s ease-out;
+}

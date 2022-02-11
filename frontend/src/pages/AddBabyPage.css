@@ -1,0 +1,51 @@
+.add-babies-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+  margin: auto;
+}
+
+.add-babies-container form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #413e3e;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.add-babies-container form div, .add-babies-container form label {
+  color: #fff;
+}
+
+.add-babies-container form input:after {
+  border-bottom: none !important;
+}
+
+.add-baby-button {
+  width: 50px;
+  height: 40px;
+  border-radius: 25%;
+  padding: 10px;
+  margin: 20px auto !important;
+  background: #9c2780 !important;
+  color: #fff !important;
+  border: 1px solid #9c2780 !important;
+  box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.25);
+  transition: .3s ease-out;
+}
+
+.add-baby-button:hover, .add-baby-button:active {
+  background: #9c2780 !important;
+  box-shadow: 3px 3px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 65px;
+}
+
+.alert {
+  position: fixed !important;
+  z-index: 9999;
+  bottom: 90px;
+}
