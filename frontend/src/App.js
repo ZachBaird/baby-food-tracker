@@ -6,6 +6,8 @@ import { ChildCareRounded, AddRounded, Person } from "@mui/icons-material";
 import { BabiesPage, AddBabyPage, ProfilePage } from "./pages";
 import Header from "./components/Header";
 import Body from './components/Body';
+import FoodList from "./components/FoodEntries/FoodList";
+import FoodEntryDetail from "./components/FoodEntries/FoodEntryDetail";
 import "./App.css";
 
 const App = () => {
@@ -21,6 +23,8 @@ const App = () => {
               <Route path="/" element={<BabiesPage setNav={setBottomNavValue} />} />
               <Route path="/add-baby" element={<AddBabyPage setNav={setBottomNavValue} />} />
               <Route path="/profile" element={<ProfilePage setNav={setBottomNavValue} />} />
+              <Route path="/babies/:id" element={<FoodList setNav={setBottomNavValue} />} />
+              <Route path="/babies/:babyId/:id" element={<FoodEntryDetail setNav={setBottomNavValue} />} />
             </Routes>
             <Paper
               className="bottom-nav"

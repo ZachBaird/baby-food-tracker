@@ -1,0 +1,153 @@
+.food-entry-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between !important;
+  background: #ddd !important;
+  color: #333 !important;
+  border-radius: 10px !important;
+  box-shadow: 3px 3px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 75% !important;
+  margin: 10px auto !important;
+  padding: 0 10px !important;
+  cursor: pointer !important;
+}
+
+.green-border {
+  border: 2px solid green !important;
+}
+
+.yellow-border {
+  border: 2px solid yellow !important;
+}
+
+.tan-border {
+  border: 2px solid tan !important;
+}
+
+.red-border {
+  border: 2px solid red !important;
+}
+
+.purple-border {
+  border: 2px solid purple !important;
+}
+
+.teal-border {
+  border: 2px solid teal !important;
+}
+
+.orange-border {
+  border: 2px solid orange !important;
+}
+
+.food-entry-item p {
+  font-size: 18px;
+}
+
+.food-entry-checkmark {
+  width: 40px;
+  height: 40px;
+}
+
+.untried {
+  color: #666;
+}
+.liked {
+  color: #60c689 !important;
+}
+.not-liked {
+  color: red !important;
+}
+
+.food-entry-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #ddd;
+}
+
+.food-entry-detail-container .upper-section {
+  font-size: 20px;
+  width: 100%;
+}
+
+.food-entry-detail-container .button-section {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  justify-content: space-evenly;
+  width: 80%;
+}
+
+.baby-liked-btn,
+.baby-disliked-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  box-shadow: 3px 3px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 75% !important;
+  margin: 10px !important;
+  padding: 0 10px !important;
+  cursor: pointer !important;
+}
+
+.baby-liked-btn {
+  background: #60c689 !important;
+}
+.baby-disliked-btn {
+  background: #e91e63 !important;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: #c21b5b !important;
+  color: #fff !important;
+  margin-left: 10px !important;
+  margin-top: 10px !important;
+  padding: 5px !important;
+  font-size: 12px !important;
+  min-width: 0px !important;
+  text-align: center !important;
+  height: 35px;
+  width: 35px;
+  border-radius: 20px !important;
+  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.back-btn svg {
+  margin-left: 7px !important;
+}
+
+.notes-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.notes-form span {
+  align-self: flex-start;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.notes-form textarea {
+  display: block;
+  width: 90% !important;
+  border-radius: 5px;
+}
+
+.notes-form button {
+  background: #9c27b0;
+  color: #fff;
+  padding: 10px 20px;
+  margin-top: 10px;
+}

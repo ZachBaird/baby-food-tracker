@@ -65,8 +65,8 @@ const AddBabyPage = ({ setNav }) => {
           <Button onClick={(e) => handleSubmit(e)} className="add-baby-button" variant="outlined"><AddCircleIcon /></Button>
 
         </Box>
-        { showSuccessAlert ? successAlert : <></>}
-        {showErrorAlert ?  errorAlert : <></>}
+        { showSuccessAlert ? successAlert : <></> }
+        { showErrorAlert ?  errorAlert : <></> }
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
   getFoodEntries,
+  getFoodEntry,
   createFoodEntry,
   updateFoodEntry,
   deleteFoodEntry, } = require('../controllers/foodEntryController');
@@ -11,6 +12,7 @@ router.route('/:babyId')
   .get(protectRoute, getFoodEntries)
   .post(protectRoute, createFoodEntry);
 router.route('/:babyId/:id')
+  .get(protectRoute, getFoodEntry)
   .put(protectRoute, updateFoodEntry)
   .delete(protectRoute, deleteFoodEntry);
 

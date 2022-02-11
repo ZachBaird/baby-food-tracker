@@ -1,13 +1,19 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 import { node } from 'prop-types';
-import { ASSIGN_BABIES, ASSIGN_FOOD_ENTRIES, ASSIGN_JWT_TOKEN, ASSIGN_USER_DATA } from './ActionTypes';
+import {
+  ASSIGN_BABIES,
+  ASSIGN_FOOD_ENTRIES,
+  ASSIGN_CURRENT_FOOD_ENTRY,
+  ASSIGN_JWT_TOKEN,
+  ASSIGN_USER_DATA } from './ActionTypes';
 import { token } from '../utilities/cookieHelpers';
 
 // Initial state.
 const initialState = {
   babies: [],
   currentFoodEntries: [],
+  currentFoodEntry: {},
   jwtToken: '',
   userData: {},
 };
@@ -36,8 +42,19 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const assignFoodEntry = (foodEntry) => {
+    dispatch({
+      type: ASSIGN_CURRENT_FOOD_ENTRY,
+      payload: foodEntry,
+    });
+  };
+
   const assignJwtToken = (newToken) => {
-    document.cookie = `${token}=${newToken};Max-Age=999999;`;
+    if (newToken === '') 
+      document.cookie = `${token}=;Max-Age=-999999;`;
+    else
+      document.cookie = `${token}=${newToken};Max-Age=999999;`;
+      
     dispatch({
       type: ASSIGN_JWT_TOKEN,
       payload: newToken,
@@ -54,10 +71,12 @@ export const GlobalProvider = ({ children }) => {
   const stateObj = {
     babies: state.babies,
     currentFoodEntries: state.currentFoodEntries,
+    currentFoodEntry: state.currentFoodEntry,
     jwtToken: state.jwtToken,
     userData: state.userData,
     assignBabies,
     assignFoodEntries,
+    assignFoodEntry,
     assignJwtToken,
     assignUserData,
   };

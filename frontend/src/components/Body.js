@@ -1,33 +1,26 @@
-import { useContext, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { node } from 'prop-types';
-import { GlobalContext } from '../contexts/GlobalState';
 import { LoginPage } from '../pages';
 import { token, getCookieValue } from '../utilities/cookieHelpers';
+import { GlobalContext } from '../contexts/GlobalState';
 
 const propTypes = { children: node };
 
-const Body = ({ children, setNav }) => {
-  const { jwtToken, assignJwtToken } = useContext(GlobalContext);
-
-  useEffect(() => {
-    const getJwtToken = () => {
-      // If we don't have token, check for cookie.
-      if (!jwtToken) {
-        const cookie = getCookieValue(token);
-        if (cookie) assignJwtToken(cookie);
-      }
-    };
-
-    getJwtToken();
-  }, [])
+const Body = ({ children }) => {
+  const { jwtToken } = useContext(GlobalContext);
+  const [cookie, setCookie] = useState('');
   
-  if (jwtToken || getCookieValue(token)) {
+  useEffect(() => {
+    setCookie(getCookieValue(token));
+  });
+
+  if (cookie || getCookieValue(token) || jwtToken) {
     return (
       <div>{children}</div>
     );
   } else {
     return (
-      <div><LoginPage /></div>
+      <div><LoginPage setCookie={setCookie} /></div>
     );
   }
 };

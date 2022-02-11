@@ -15,6 +15,18 @@ const getFoodEntries = asyncHandler(async (req, res) => {
   return res.status(200).json(foodEntries);
 });
 
+// @desc    Get a food entry by Id
+// @route   GET /api/foodentries/:id
+// @access  Private
+const getFoodEntry = asyncHandler(async (req, res) => {
+  const baby = await Baby.findOne({ user: req.user.id });
+  if (!baby)
+    createErrorResponse(res, 403, 'Invalid baby access.');
+
+  const foodEntry = await FoodEntry.findById(req.params.id);
+  return res.status(200).json(foodEntry);
+})
+
 // @desc    Create food entry
 // @route   POST /api/foodentries
 // @access  Private
@@ -83,6 +95,7 @@ const deleteFoodEntry = asyncHandler(async (req, res) => {
 
 module.exports = {
   getFoodEntries,
+  getFoodEntry,
   createFoodEntry,
   updateFoodEntry,
   deleteFoodEntry,

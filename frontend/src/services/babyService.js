@@ -10,7 +10,7 @@ const generateHeaders = (token) => {
   };
 
   return config;
-}
+};
 
 const getBabies = async (token) => {
   const config = generateHeaders(token);

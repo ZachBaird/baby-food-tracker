@@ -5,10 +5,15 @@ import Button from '@mui/material/Button';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import userService from '../services/userService';
 import { GlobalContext } from '../contexts/GlobalState';
+import { func } from 'prop-types';
 import { token, getCookieValue } from '../utilities/cookieHelpers';
 import './LoginPage.css';
 
-const LoginPage = () => {
+const propTypes = {
+  setCookie: func,
+};
+
+const LoginPage = ({ setCookie }) => {
   const { jwtToken, assignJwtToken } = useContext(GlobalContext);
 
   const [email, setEmail] = useState('');
@@ -17,9 +22,11 @@ const LoginPage = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const data = userService.login(email, pass);
-    if (data)
+    const data = await userService.login(email, pass);
+    if (data) {
       assignJwtToken(data.token);
+      setCookie(data.token);
+    }
   };
 
   if (!getCookieValue(token) || !jwtToken) {
@@ -55,5 +62,7 @@ const LoginPage = () => {
     return (<></>);
   }
 };
+
+LoginPage.propTypes = propTypes;
 
 export default LoginPage;

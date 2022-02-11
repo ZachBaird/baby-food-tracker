@@ -1,6 +1,8 @@
 import { useEffect, useContext } from 'react';
 import { func } from 'prop-types';
 import { GlobalContext } from '../contexts/GlobalState';
+import Button from '@mui/material/Button';
+import LogoutIcon from '@mui/icons-material/Logout';
 import userService from '../services/userService';
 import { token, getCookieValue } from '../utilities/cookieHelpers';
 import './ProfilePage.css';
@@ -8,7 +10,7 @@ import './ProfilePage.css';
 const propTypes = { setNav: func };
 
 const ProfilePage = ({ setNav }) => {
-  const { userData, assignUserData } = useContext(GlobalContext);
+  const { assignJwtToken, userData, assignUserData } = useContext(GlobalContext);
 
   useEffect(() => setNav('profile'));
   useEffect(() => {
@@ -21,13 +23,23 @@ const ProfilePage = ({ setNav }) => {
 
     setUserData();
   }, []);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    assignJwtToken('');
+  };
   
   return (
     <div className="page-container">
       <div className="profile-container">
-        <h2><span>Name:</span><span>{userData.name}</span></h2>
-        <p><span>Email:</span><span>{userData.email}</span></p>
+        <h2><span>Name:</span>  <span>{userData.name}</span></h2>
+        <p><span>Email:</span>  <span>{userData.email}</span></p>
+      <Button className="logout-button" onClick={(e) => handleLogout(e)} variant="outlined">
+        <span>Logout</span>
+        <LogoutIcon />  
+      </Button>
       </div>
+
     </div>
   );
 };

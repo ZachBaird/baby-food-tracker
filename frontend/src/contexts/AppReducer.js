@@ -1,5 +1,6 @@
 import {
   ASSIGN_BABIES,
+  ASSIGN_CURRENT_FOOD_ENTRY,
   ASSIGN_FOOD_ENTRIES,
   ASSIGN_JWT_TOKEN,
   ASSIGN_USER_DATA
@@ -15,7 +16,12 @@ const reducer = (state, action) => {
     case ASSIGN_FOOD_ENTRIES:
       return {
         ...state,
-        foodEntries: action.payload,
+        currentFoodEntries: action.payload,
+      };
+    case ASSIGN_CURRENT_FOOD_ENTRY:
+      return {
+        ...state,
+        currentFoodEntry: action.payload,
       };
     case ASSIGN_JWT_TOKEN:
       return {
