@@ -11,9 +11,21 @@ connectDb();
 
 const app = express();
 
+const allowedOrigins = [
+  'https://oreo-baby-food-tracker.netlify.app/',
+  'http://localhost:3000',
+];
+
 const corsOptions = {
-  origin: 'http://localhost:3000'
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 };
+
 app.use(cors(corsOptions));
 
 
