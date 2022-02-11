@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
-import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import userService from '../services/userService';
 import { GlobalContext } from '../contexts/GlobalState';
 import { token, getCookieValue } from '../utilities/cookieHelpers';
 import './LoginPage.css';
@@ -17,20 +17,9 @@ const LoginPage = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const params = new URLSearchParams();
-    params.append('email', email);
-    params.append('password', pass);
-
-    try {
-      const result = await axios.post(`http://localhost:5000/api/users/login`, params);
-
-      if (result.status === 200) {
-        const data = await result.data;
-        assignJwtToken(data.token);
-      }
-    } catch (err) {
-      console.warn(err);
-    }
+    const data = userService.login(email, pass);
+    if (data)
+      assignJwtToken(data.token);
   };
 
   if (!getCookieValue(token) || !jwtToken) {
