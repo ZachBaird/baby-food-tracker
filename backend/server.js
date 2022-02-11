@@ -12,7 +12,7 @@ connectDb();
 const app = express();
 
 const allowedOrigins = [
-  'https://oreo-baby-food-tracker.netlify.app/',
+  'https://oreo-baby-food-tracker.netlify.app',
   'http://localhost:3000',
 ];
 
