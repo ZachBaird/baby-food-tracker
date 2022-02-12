@@ -2,6 +2,10 @@
 
 This app was an idea from my wife. We just started giving our son baby foods. My wife lamented that there are no apps to track what foods a baby likes as they start out; I resolved to give her just the tool she'll need.
 
+The `backend` is an Express.js REST API. It makes use of Mongoose. Most routes are protected.
+
+The `frontend` is a React.js app.
+
 ## Backend
 ### Setup
 
@@ -37,9 +41,9 @@ I will need to take some time and polish configurations/deployment. Until that t
 
 ## Todos
 
-* Activate PWA capabilities
 * Add logging
 * Add tests
 * Add filtering to foods list
-* Fix new food entry form notes
-* Add "baby hasn't tried" option to food detail
+* Add user invitations
+* Add more useful info for parents
+* Refine deployment process & configuration
