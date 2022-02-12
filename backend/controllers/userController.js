@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
+const Baby = require('../models/babyModel');
 const asyncHandler = require('express-async-handler');
 const { createErrorResponse } = require('../utilities/createErrorResponse');
 
@@ -68,12 +69,15 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route     GET /api/users/me
 // @access    Private
 const getCurrentUserData = asyncHandler(async (req, res) => {
-  const { id, name, email } = await User.findById(req.user.id);
+  const { id, name, email, createdAt } = await User.findById(req.user.id);
+  const babies = await Baby.find({ user: id });
 
   res.status(200).json({
     id,
     name,
     email,
+    babyCount: babies.length,
+    createdAt,
   });
 });
 

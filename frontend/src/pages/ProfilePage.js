@@ -10,10 +10,9 @@ import './ProfilePage.css';
 const propTypes = { setNav: func };
 
 const ProfilePage = ({ setNav }) => {
-  const { assignJwtToken, userData, assignUserData } = useContext(GlobalContext);
+  const { assignJwtToken, userData, assignUserData, assignBabies } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log('aaaaah');
     setNav('profile')
     const setUserData = async () => {
       if (Object.keys(userData).length === 0) {
@@ -29,6 +28,7 @@ const ProfilePage = ({ setNav }) => {
     e.preventDefault();
     assignJwtToken('');
     assignUserData({});
+    assignBabies([]);
   };
   
   return (
@@ -36,6 +36,8 @@ const ProfilePage = ({ setNav }) => {
       <div className="profile-container">
         <h2><span>Name:</span>  <span>{userData.name}</span></h2>
         <p><span>Email:</span>  <span>{userData.email}</span></p>
+        <p><span>Babies:</span> <span>{userData.babyCount}</span></p>
+        <p><span>Joined:</span> <span>{new Date(userData.createdAt).toLocaleDateString()}</span></p>
       <Button className="logout-button" onClick={(e) => handleLogout(e)} variant="outlined">
         <span>Logout</span>
         <LogoutIcon />  

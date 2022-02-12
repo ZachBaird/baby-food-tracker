@@ -22,12 +22,12 @@ const FoodEntryDetail = ({ setNav }) => {
   const { babyId, id } = useParams();
   let navigate = useNavigate();
   const [hasBabyTried, setHasBabyTried] = useState(false);
-  const [newNotes, setNewNotes] = useState(currentFoodEntry?.notes ?? '');
+  const [newNotes, setNewNotes] = useState('');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
 
-  const successAlert = <Alert className="alert" severity="success" onClose={() => setShowSuccessAlert(false)}>Notes saved.</Alert>;
-  const errorAlert = <Alert className="alert" severity="error" onClose={() => setShowErrorAlert(false)}>Error saving notes.</Alert>
+  const successAlert = <Alert className="alert" severity="success" onClose={() => setShowSuccessAlert(false)}>Changes saved.</Alert>;
+  const errorAlert = <Alert className="alert" severity="error" onClose={() => setShowErrorAlert(false)}>Error saving changes.</Alert>
 
 
   useEffect(() => {
@@ -43,9 +43,11 @@ const FoodEntryDetail = ({ setNav }) => {
 
       const babyHasTriedFood = entry.babyLiked !== null;
       setHasBabyTried(babyHasTriedFood);
-    };
 
+    };
+    
     getFoodEntry();
+    setNewNotes(currentFoodEntry?.notes ?? '');
   }, []);
 
   const foodNotTried = <p>Baby has not tried this food yet.</p>;
@@ -98,7 +100,7 @@ const FoodEntryDetail = ({ setNav }) => {
     } else {
       setShowErrorAlert(true);
       setTimeout(() => setShowErrorAlert(false), 2500);
-    };
+    }
   };
 
   const deleteFoodEntry = async (e) => {
@@ -115,6 +117,33 @@ const FoodEntryDetail = ({ setNav }) => {
       navigate(`/babies/${babyId}`);
     }
   };
+
+  const resetFoodEntry = async (e) => {
+    e.preventDefault();
+
+    const resetFood = {
+      notes: '',
+      babyLiked: null,
+    };
+
+    const result = await foodEntryService.updateFoodEntry(
+      getCookieValue(token),
+      babyId,
+      id,
+      resetFood,
+    );
+
+    if (result) {
+      setNewNotes('');
+      setHasBabyTried(false);
+      assignFoodEntry(result);
+      setShowSuccessAlert(true);
+      setTimeout(() => setShowSuccessAlert(false), 2500);
+    }  else {
+      setShowErrorAlert(true);
+      setTimeout(() => setShowErrorAlert(false), 2500);
+    }
+  }
 
   return (
     <div className="page-container">
@@ -158,6 +187,7 @@ const FoodEntryDetail = ({ setNav }) => {
         <p>Entry last updated: {new Date(currentFoodEntry?.updatedAt).toLocaleDateString()} </p>
 
         <Button className="delete-food-entry-btn" onClick={(e) => deleteFoodEntry(e)} id="outlined-basic">Delete</Button>
+        <Button onClick={(e) => resetFoodEntry(e)} id="outlined-basic">Reset Food</Button>
       </div>
     </div>
   );

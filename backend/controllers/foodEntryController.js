@@ -72,6 +72,9 @@ const updateFoodEntry = asyncHandler(async (req, res) => {
     type: req.body?.type ?? foodEntry.type,
   };
 
+  if (req.body?.babyLiked === null)
+    dataToUpdate.babyLiked = null;
+
   const updatedFoodEntry = await FoodEntry.findByIdAndUpdate(req.params.id, dataToUpdate, { new: true });
 
   return res.status(200).json(updatedFoodEntry);
