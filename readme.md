@@ -31,6 +31,8 @@ Within this repo root is a `postman_import.postman_collection`. Import this into
 
 This app was written with the intent of hosting the backend on Heroku and the frontend on Netlify. The app is pushed to Heroku where the backend dependencies are brought in & the server is started. The frontend is built and deployed to Netlify.
 
+Env configs are assigned via the Heroku CLI.
+
 I will need to take some time and polish configurations/deployment. Until that time is invested, the process is simple, albeit manual and dirty.
 
 ## Todos
