@@ -12,8 +12,9 @@ const propTypes = { setNav: func };
 const ProfilePage = ({ setNav }) => {
   const { assignJwtToken, userData, assignUserData } = useContext(GlobalContext);
 
-  useEffect(() => setNav('profile'));
   useEffect(() => {
+    console.log('aaaaah');
+    setNav('profile')
     const setUserData = async () => {
       if (Object.keys(userData).length === 0) {
         const data = await userService.getUserInfo(getCookieValue(token));
@@ -22,11 +23,12 @@ const ProfilePage = ({ setNav }) => {
     };
 
     setUserData();
-  }, []);
+  });
 
   const handleLogout = (e) => {
     e.preventDefault();
     assignJwtToken('');
+    assignUserData({});
   };
   
   return (

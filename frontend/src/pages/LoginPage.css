@@ -3,6 +3,7 @@
   height: 94vh;
   margin-top: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -13,11 +14,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 20px auto;
   flex-direction: column;
   background: #423F3F;
   border-radius: 10px;
   box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.25);
+}
+
+.registration {
+  height: 60% !important;
 }
 
 form {
@@ -36,7 +41,7 @@ form {
   margin-bottom: 20px;
 }
 
-.login-button {
+.login-button, .register-btn {
   width: 50px;
   height: 40px;
   border-radius: 25%;
@@ -47,6 +52,11 @@ form {
   border: 1px solid #c21858 !important;
   box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.25);
   transition: .3s ease-out;
+}
+
+.register-btn {
+  width: 120px !important;
+  border-radius: 10px !important;
 }
 
 .login-button:hover, .login-button:active {

@@ -19,6 +19,16 @@ const login = async (email, password) => {
 
   const result = await axios.post(`${apiUrl}login`, params);
   return result.data;
+};
+
+const register = async (name, email, password) => {
+  const params = new URLSearchParams();
+  params.append('name', name);
+  params.append('email', email);
+  params.append('password', password);
+
+  const result = await axios.post(`${apiUrl}`, params);
+  return result.data;
 }
 
 const getUserInfo  = async (token) => {
@@ -30,6 +40,7 @@ const getUserInfo  = async (token) => {
 
 const userService = {
   login,
+  register,
   getUserInfo,
 };
 
