@@ -27,6 +27,12 @@ Within this repo root is a `postman_import.postman_collection`. Import this into
 2. Run `npm i`
 3. Run `npm start`
 
+## Deployment Notes
+
+This app was written with the intent of hosting the backend on Heroku and the frontend on Netlify. The app is pushed to Heroku where the backend dependencies are brought in & the server is started. The frontend is built and deployed to Netlify.
+
+I will need to take some time and polish configurations/deployment. Until that time is invested, the process is simple, albeit manual and dirty.
+
 ## Todos
 
 * Activate PWA capabilities
