@@ -36,6 +36,7 @@ const NewFoodEntryModal = ({ handleSubmission, newItemOpen, handleNewClose }) =>
   const [newFoodType, setFoodType] = useState("");
   const [newFoodLiked, setFoodLiked] = useState(false);
   const [newFoodNotes, setFoodNotes] = useState("");
+  const [newFoodAllergy, setFoodAllergy] = useState(false);
 
   return (
     <Modal
@@ -99,12 +100,19 @@ const NewFoodEntryModal = ({ handleSubmission, newItemOpen, handleNewClose }) =>
               <label>Did Baby like food?</label>
               <Switch
                 checked={newFoodLiked}
-                onChange={(e) => setFoodLiked(!newFoodLiked)}
+                onChange={() => setFoodLiked(!newFoodLiked)}
+              />
+            </section>
+            <section className="switch-and-label">
+              <label>Allergic Reaction?</label>
+              <Switch
+                checked={newFoodAllergy}
+                onChange={() => setFoodAllergy(!newFoodAllergy)}
               />
             </section>
             <Button
               className="new-food-btn"
-              onClick={(e) => handleSubmission(e, { newFoodName, newFoodType, newFoodNotes, newFoodLiked })}
+              onClick={(e) => handleSubmission(e, { newFoodName, newFoodType, newFoodNotes, newFoodLiked, newFoodAllergy })}
             >
               Add
             </Button>

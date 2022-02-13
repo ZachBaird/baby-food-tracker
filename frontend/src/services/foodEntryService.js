@@ -31,6 +31,7 @@ const createFoodEntry = async (token, babyId, newFood) => {
   params.append('type', newFood.type);
   params.append('babyLiked', newFood.liked);
   params.append('notes', newFood.notes);
+  params.append('hadAllergy', newFood.hadAllergy);
 
   const response = await axios.post(`${apiUrl}${babyId}`, params, config);
   return response.data;

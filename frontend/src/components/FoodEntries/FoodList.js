@@ -92,6 +92,7 @@ const FoodList = ({ setNav }) => {
         type: newData.newFoodType,
         notes: newData.newFoodNotes,
         liked: newData.newFoodLiked,
+        hadAllergy: newData.newFoodAllergy,
       }
     );
 
@@ -139,17 +140,16 @@ const FoodList = ({ setNav }) => {
       <InfoModal modalInfoOpen={modalInfoOpen} handleInfoClose={handleInfoClose} />
       <NewFoodEntryModal handleSubmission={handleSubmission} newItemOpen={newItemOpen} handleInfoClose={handleInfoClose} /> 
       
+      <div style={{display: 'flex', alignItems: 'center', margin: '10px 0'}}>
       <Button className="info-button" onClick={handleInfoOpen}>
         <InfoIcon className="food-list-info-icon" />
       </Button>
       <Button className="new-button" onClick={handleNewOpen}>
         <AddBoxIcon className="food-list-new-icon" />
       </Button>
-      {/* {currentFoodEntries?.sort(alphabeticalSort).map((foodEntry) => (
-        <FoodEntryItem babyId={id} key={foodEntry._id} {...foodEntry} />
-      ))} */}
+      </div>
 
-      { allergenFoods.length !== 0 && (<Accordion className="food-accordion" style={{marginTop: '15px'}}>
+      { allergenFoods.length !== 0 && (<Accordion className="food-accordion">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

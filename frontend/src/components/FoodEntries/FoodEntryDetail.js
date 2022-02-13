@@ -25,6 +25,7 @@ const FoodEntryDetail = ({ setNav }) => {
   const [newNotes, setNewNotes] = useState('');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [babyAllergies, setBabyHadAllergies] = useState(false);
 
   const successAlert = <Alert className="alert" severity="success" onClose={() => setShowSuccessAlert(false)}>Changes saved.</Alert>;
   const errorAlert = <Alert className="alert" severity="error" onClose={() => setShowErrorAlert(false)}>Error saving changes.</Alert>
@@ -43,7 +44,7 @@ const FoodEntryDetail = ({ setNav }) => {
 
       const babyHasTriedFood = entry.babyLiked !== null;
       setHasBabyTried(babyHasTriedFood);
-
+      setBabyHadAllergies(entry.hadAllergy);
     };
     
     await getFoodEntry();
@@ -62,7 +63,7 @@ const FoodEntryDetail = ({ setNav }) => {
     </p>
   );
 
-  const allergenMessage = currentFoodEntry?.type === 'Allergens' ? (<p className="allergen-message">NOTE: This is an allergen food! Follow instructions from your pediatrician and proceed with caution!</p>) : <></>;
+  const allergenMessage = currentFoodEntry?.type === 'Allergens' ? (<p className="allergen-message">ALLERGEN ALERT! Consult pediatrician and proceed with caution!</p>) : <></>;
 
   const setLike = async (e, liked) => {
     e.preventDefault();
@@ -76,6 +77,18 @@ const FoodEntryDetail = ({ setNav }) => {
     if (result) assignFoodEntry(result);
     setHasBabyTried(true);
   };
+  const setAllergy = async (e, hadAllergies) => {
+    e.preventDefault();
+    const newFoodEntry = { ...currentFoodEntry, hadAllergy: hadAllergies };
+    const result = await foodEntryService.updateFoodEntry(
+      getCookieValue(token),
+      babyId,
+      id,
+      newFoodEntry,
+    );
+    if (result) assignFoodEntry(result);
+    setBabyHadAllergies(result.hadAllergy);
+  }
 
   const babyLiked = async (e) => {
     await setLike(e, true);
@@ -83,6 +96,9 @@ const FoodEntryDetail = ({ setNav }) => {
   const babyDisliked = async (e) => {
     await setLike(e, false);
   };
+
+  const babyNoAllergies = async (e) => await setAllergy(e, false);
+  const babyHadAllergies = async (e) => await setAllergy(e, true);
 
   const saveNotes = async (e) => {
     e.preventDefault();
@@ -146,7 +162,7 @@ const FoodEntryDetail = ({ setNav }) => {
   }
 
   return (
-    <div className="page-container" style={{marginBottom: '150px'}}>
+    <div className="page-container" style={{marginBottom: '100px'}}>
       <Button className="back-btn" href={`/babies/${babyId}`}>
         <ArrowBackIosIcon />
       </Button>
@@ -159,9 +175,11 @@ const FoodEntryDetail = ({ setNav }) => {
 
         {hasBabyTried ? foodTried : foodNotTried}
 
+        { babyAllergies && <p style={{color: 'red', margin: '0'}}>Baby had allergic reaction!</p>}
+
         {allergenMessage}
 
-        <section className="button-section">
+        <section className="button-section" style={{marginBottom: '20px'}}>
           <Button className="baby-liked-btn" onClick={(e) => babyLiked(e)}>
             <p>Likes!</p>
             <ThumbUpIcon />
@@ -172,6 +190,16 @@ const FoodEntryDetail = ({ setNav }) => {
           >
             <p>Dislikes!</p>
             <ThumbDownIcon />
+          </Button>
+        </section>
+
+        Allergic Reaction ?
+        <section className="button-section">
+          <Button className="baby-no-allergy-btn" onClick={(e) => babyNoAllergies(e)}>
+            <p>No</p>
+          </Button>
+          <Button className="baby-allergy-btn" onClick={(e) => babyHadAllergies(e)}>
+            <p>Yes</p>
           </Button>
         </section>
 

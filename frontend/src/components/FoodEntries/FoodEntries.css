@@ -102,6 +102,7 @@
 
 .food-entry-item p {
   font-size: 18px;
+  line-height: 1;
 }
 
 .food-entry-checkmark {
@@ -143,7 +144,9 @@
 
 .baby-liked-btn,
 .baby-disliked-btn,
-.delete-food-entry-btn {
+.delete-food-entry-btn,
+.baby-no-allergy-btn,
+.baby-allergy-btn {
   display: flex !important;
   align-items: center;
   justify-content: space-between !important;
@@ -162,11 +165,16 @@
   background: #c91e57 !important;
 }
 
-.baby-liked-btn {
+.baby-liked-btn, .baby-no-allergy-btn {
   background: #60c689 !important;
 }
-.baby-disliked-btn {
+.baby-disliked-btn, .baby-allergy-btn {
   background: #e91e63 !important;
+}
+
+.baby-no-allergy-btn, .baby-allergy-btn {
+  width: 30px !important;
+  display: inline-block !important;
 }
 
 .back-btn {

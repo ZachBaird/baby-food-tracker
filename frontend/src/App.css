@@ -17,6 +17,9 @@ body, #root {
 
 .bottom-nav div {
   background: #343434;
+  min-height:56px;
+  height: 15vh;
+  max-height: 75px;
 }
 
 .bottom-nav div a {
@@ -31,5 +34,7 @@ body, #root {
 }
 
 .page-container {
-  height: 90vh;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }

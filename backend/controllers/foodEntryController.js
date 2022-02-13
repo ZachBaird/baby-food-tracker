@@ -47,6 +47,7 @@ const createFoodEntry = asyncHandler(async (req, res) => {
     notes: req.body.notes,
     type: req.body.type,
     baby: req.params.babyId,
+    hadAllergy: req.body.hadAllergy,
   });
 
   return res.status(200).json(foodEntry);
@@ -70,6 +71,7 @@ const updateFoodEntry = asyncHandler(async (req, res) => {
     babyLiked: req.body?.babyLiked ?? foodEntry.babyLiked,
     notes: req.body?.notes ?? foodEntry.notes,
     type: req.body?.type ?? foodEntry.type,
+    hadAllergy: req.body?.hadAllergy ?? foodEntry.hadAllergy,
   };
 
   if (req.body?.babyLiked === null)

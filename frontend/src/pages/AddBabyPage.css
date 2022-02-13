@@ -5,6 +5,8 @@
   width: 60%;
   height: 100%;
   margin: auto;
+  align-self: center;
+  justify-self: center;
 }
 
 .add-babies-container form {
