@@ -43,7 +43,6 @@ I will need to take some time and polish configurations/deployment. Until that t
 
 * Add logging
 * Add tests
-* Add filtering to foods list
 * Add user invitations
 * Add more useful info for parents
 * Refine deployment process & configuration
