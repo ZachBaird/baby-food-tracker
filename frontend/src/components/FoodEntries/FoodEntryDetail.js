@@ -30,7 +30,7 @@ const FoodEntryDetail = ({ setNav }) => {
   const errorAlert = <Alert className="alert" severity="error" onClose={() => setShowErrorAlert(false)}>Error saving changes.</Alert>
 
 
-  useEffect(() => {
+  useEffect(async () => {
     setNav("babies");
 
     const getFoodEntry = async () => {
@@ -46,7 +46,7 @@ const FoodEntryDetail = ({ setNav }) => {
 
     };
     
-    getFoodEntry();
+    await getFoodEntry();
     setNewNotes(currentFoodEntry?.notes ?? '');
   }, []);
 
@@ -146,7 +146,7 @@ const FoodEntryDetail = ({ setNav }) => {
   }
 
   return (
-    <div className="page-container">
+    <div className="page-container" style={{marginBottom: '150px'}}>
       <Button className="back-btn" href={`/babies/${babyId}`}>
         <ArrowBackIosIcon />
       </Button>

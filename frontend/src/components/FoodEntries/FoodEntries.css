@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between !important;
   color: #ddd !important;
+  background: #242424 !important;
   border-radius: 10px !important;
   box-shadow: 3px 3px 4px 4px rgba(0, 0, 0, 0.25);
   width: 75% !important;
@@ -35,6 +36,15 @@
 
 .new-food-modal .modal-title button {
   color: #e91e63;
+}
+
+.food-accordion {
+  background: #141414 !important;
+  color: #ccc !important;
+}
+
+.food-accordion svg {
+  color: #fff !important;
 }
 
 .new-food-modal .modal-body input,
