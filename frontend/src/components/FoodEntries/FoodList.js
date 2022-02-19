@@ -57,7 +57,7 @@ const FoodList = ({ setNav }) => {
       const protein = foodEntries.filter((entry) => entry.type === 'Protein');
       const starches = foodEntries.filter((entry) => entry.type === 'Starch');
       const vegetables = foodEntries.filter((entry) => entry.type === 'Vegetables');
-  
+
       setAllergenFoods(allergens);
       setDairyFoods(dairies);
       setFruitFoods(fruits);
@@ -71,8 +71,7 @@ const FoodList = ({ setNav }) => {
 
     if (currentFoodEntries.length === 0)
       getFoods();
-
-  }, [currentFoodEntries]);
+  }, []);
 
   const alphabeticalSort = (a, b) => {
     if (a.type < b.type) return -1;

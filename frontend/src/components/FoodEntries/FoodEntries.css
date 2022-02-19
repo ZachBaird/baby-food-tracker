@@ -44,7 +44,7 @@
 }
 
 .food-accordion svg {
-  color: #fff !important;
+  color: #fff;
 }
 
 .new-food-modal .modal-body input,
@@ -213,7 +213,7 @@
   align-items: center;
   justify-content: center;
   width: 80%;
-  margin-top: 20px;
+  margin: 10px 0;
 }
 
 .notes-form span {
@@ -233,4 +233,29 @@
   color: #fff;
   padding: 10px 20px;
   margin-top: 10px;
+}
+
+.message-button-section {
+  display: flex;
+  width: 85%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.message-button-section .baby-liked-btn,
+.message-button-section .baby-disliked-btn {
+  width: 50px !important;
+  min-width: 0px !important;
+  display: inline-block !important;
+  text-align: center;
+  padding: 5px 5px !important;
+  height: 40px !important;
+  border-radius: 20px !important;
+  margin: 4px !important;
+}
+
+.message-button-section .baby-liked-btn svg,
+.message-button-section .baby-disliked-btn svg {
+  margin-top: 4px !important;
 }

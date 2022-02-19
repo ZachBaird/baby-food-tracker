@@ -53,7 +53,7 @@ export const GlobalProvider = ({ children }) => {
     if (newToken === '') 
       document.cookie = `${token}=;Max-Age=-999999;`;
     else
-      document.cookie = `${token}=${newToken};Max-Age=999999;`;
+      document.cookie = `${token}=${newToken};Max-Age=604800;`;
       
     dispatch({
       type: ASSIGN_JWT_TOKEN,
